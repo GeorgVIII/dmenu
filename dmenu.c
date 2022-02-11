@@ -393,9 +393,6 @@ keypress(XKeyEvent *ev)
 		case XK_KP_Right:
 			movewordedge(+1);
 			goto draw;
-		case XK_Return:
-		case XK_KP_Enter:
-			break;
 		case XK_bracketleft:
 			cleanup();
 			exit(1);
@@ -412,10 +409,13 @@ keypress(XKeyEvent *ev)
 			goto draw;
 		case XK_g: ksym = XK_Home;  break;
 		case XK_G: ksym = XK_End;   break;
-		case XK_h: ksym = XK_Up;    break;
-		case XK_j: ksym = XK_Next;  break;
-		case XK_k: ksym = XK_Prior; break;
-		case XK_l: ksym = XK_Down;  break;
+		case XK_k: ksym = XK_Up;    break;
+		case XK_l: ksym = XK_Next;  break;
+		case XK_h: ksym = XK_Prior; break;
+		case XK_j: ksym = XK_Down;  break;
+		case XK_Return:
+		case XK_KP_Enter:
+			break;
 		default:
 			return;
 		}
@@ -500,7 +500,7 @@ insert:
 	case XK_Return:
 	case XK_KP_Enter:
 		puts((sel && !(ev->state & ShiftMask)) ? sel->text : text);
-		if (!(ev->state & ControlMask)) {
+		if (!(ev->state & Mod1Mask)) {
 			cleanup();
 			exit(0);
 		}
