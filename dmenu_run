@@ -1,2 +1,8 @@
 #!/bin/sh
-dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} &
+
+cmd=$(dmenu_path | dmenu -l 10 -p 'Run:' "$@") || exit
+
+case $cmd in
+	*\!) exec "${TERMINAL:-st}" -e ${cmd%?} ;;
+	*) exec ${cmd} ;;
+esac
