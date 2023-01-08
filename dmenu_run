@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cmd=$(dmenu_path | dmenu -l 10 -p 'Run:' "$@") || exit
+cmd=$(dmenu_path | dmenu -p 'Run:' "$@") || exit
 
 case $cmd in
 	*\!) exec "${TERMINAL:-st}" -e ${cmd%?} ;;
